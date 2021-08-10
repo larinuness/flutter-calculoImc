@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
                               TextStyle(color: Colors.black54, fontSize: 20)),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Insira sua Altura!";
+                          return "Insira seu Peso!";
                         }
                       },
                     ),
@@ -92,7 +92,12 @@ class _HomeState extends State<Home> {
                         width: 140,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: calculate,
+                          onPressed: () {
+                            //quando apertar o botão vai verificar se o formulário tá válido e se estiver ele chama a função calculate
+                            if(_formKey.currentState!.validate()) {
+                              calculate();
+                            }
+                          },
                           child: Text('Calcular'),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.deepPurple,
@@ -123,6 +128,7 @@ class _HomeState extends State<Home> {
     _pesoController.text = "";
     setState(() {
       _infoText = 'Informe seus dados';
+      _formKey = GlobalKey<FormState>();
     });
   }
 
